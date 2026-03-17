@@ -24,15 +24,17 @@ export default function NavBar() {
     router.push('/login')
   }
 
-  const navLinks = member
-    ? [
-        { href: '/calendar', label: t.nav.calendar, external: false },
-        { href: '/bookings', label: t.nav.myBookings, external: false },
-        ...((member.privmask & 0x80) !== 0
-          ? [{ href: `${CLASSIC_URL}/s/booking/admin.php`, label: t.nav.administration, external: true }]
-          : []),
-      ]
-    : []
+  const navLinks = [
+    { href: '/calendar', label: t.nav.calendar, external: false },
+    ...(member
+      ? [
+          { href: '/bookings', label: t.nav.myBookings, external: false },
+          ...((member.privmask & 0x80) !== 0
+            ? [{ href: `${CLASSIC_URL}/s/booking/admin.php`, label: t.nav.administration, external: true }]
+            : []),
+        ]
+      : []),
+  ]
 
   return (
     <>

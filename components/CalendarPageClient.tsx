@@ -68,7 +68,7 @@ export default function CalendarPageClient({ year, month, tab, slots, entries }:
           <Link
             key={id}
             href={`/calendar/${year}/${month}?tab=${id}`}
-            className={`px-5 py-2.5 text-base font-medium border-b-2 transition-colors -mb-px ${
+            className={`px-5 py-2.5 text-base font-medium border-b-2 transition-colors -mb-px whitespace-nowrap ${
               id === tab
                 ? 'border-[#253551] text-[#253551]'
                 : 'border-transparent text-gray-500 hover:text-gray-700'

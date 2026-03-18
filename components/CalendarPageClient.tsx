@@ -63,7 +63,7 @@ export default function CalendarPageClient({ year, month, tab, slots, entries }:
       </div>
 
       {/* Tabs */}
-      <div className="mb-4 flex gap-1 border-b border-gray-200">
+      <div className="mb-4 flex gap-1 border-b border-gray-200 overflow-x-auto scrollbar-none">
         {tabs.map(({ id, label }) => (
           <Link
             key={id}

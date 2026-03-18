@@ -131,12 +131,18 @@ export default function CalendarGrid({ year, month, slots, entries }: Props) {
       {/* Popover */}
       {popover && (
         <div
-          className="fixed z-50 w-60 rounded-xl border border-gray-200 bg-white p-4 shadow-xl"
-          style={{
-            left: Math.min(popover.x - 120, typeof window !== 'undefined' ? window.innerWidth - 256 : 0),
-            top: popover.y - 8,
-            transform: 'translateY(-100%)',
-          }}
+          className="fixed z-50 w-72 rounded-xl border border-gray-200 bg-white p-4 shadow-xl
+            sm:w-60
+            max-sm:bottom-4 max-sm:left-1/2 max-sm:-translate-x-1/2"
+          style={
+            typeof window !== 'undefined' && window.innerWidth >= 640
+              ? {
+                  left: Math.min(popover.x - 120, window.innerWidth - 256),
+                  top: popover.y - 8,
+                  transform: 'translateY(-100%)',
+                }
+              : undefined
+          }
           onClick={e => e.stopPropagation()}
         >
           <div className="mb-2 flex items-center justify-between">

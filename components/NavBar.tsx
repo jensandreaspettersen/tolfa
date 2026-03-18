@@ -34,7 +34,7 @@ export default function NavBar() {
     ...(member
       ? [
           { href: '/bookings', label: t.nav.myBookings, external: false },
-          ...((member.privmask & 0x80) !== 0
+          ...(CLASSIC_URL && (member.privmask & 0x80) !== 0
             ? [{ href: `${CLASSIC_URL}/s/booking/admin.php`, label: t.nav.administration, external: true }]
             : []),
         ]
@@ -43,22 +43,24 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Version toggle banner */}
-      <div className="bg-[#253551] text-white text-xs px-4 py-1.5 flex items-center justify-between">
-        <span className="rounded-full bg-white/20 px-2 py-0.5 font-semibold tracking-wide">
-          {t.nav.newDesignBadge}
-        </span>
-        <a
-          href={
-            member
-              ? `${CLASSIC_URL}/api/autologin.php?pid=${member.id}&redirect=/s/booking/month.php`
-              : `${CLASSIC_URL}/s/booking/month.php`
-          }
-          className="flex items-center gap-1 text-white/90 hover:text-white underline underline-offset-2"
-        >
-          {t.nav.switchToClassic} →
-        </a>
-      </div>
+      {/* Version toggle banner — only shown when classic URL is configured */}
+      {CLASSIC_URL && (
+        <div className="bg-[#253551] text-white text-xs px-4 py-1.5 flex items-center justify-between">
+          <span className="rounded-full bg-white/20 px-2 py-0.5 font-semibold tracking-wide">
+            {t.nav.newDesignBadge}
+          </span>
+          <a
+            href={
+              member
+                ? `${CLASSIC_URL}/api/autologin.php?pid=${member.id}&redirect=/s/booking/month.php`
+                : `${CLASSIC_URL}/s/booking/month.php`
+            }
+            className="flex items-center gap-1 text-white/90 hover:text-white underline underline-offset-2"
+          >
+            {t.nav.switchToClassic} →
+          </a>
+        </div>
+      )}
 
       {/* Main nav */}
       <nav className="border-b border-gray-200 bg-white shadow-sm">
